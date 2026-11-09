@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Foodeaz.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac7d29955625ea6bf086d942be72f984ee46ccdc")]
 [assembly: System.Reflection.AssemblyProductAttribute("Foodeaz.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Foodeaz.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
