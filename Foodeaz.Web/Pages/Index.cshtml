@@ -1,0 +1,207 @@
+@page
+@model Foodeaz.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<main>
+
+    <!-- Home slider -->
+    <section class="homeSlider">
+        <div class="swiper-container homeswiper-container w-100">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.SliderItems)
+                {
+                    <div class="swiper-slide d-flex justify-content-left align-items-center"
+                         style="background-image: url('@Url.Content("~/img/" + item.Image)')">
+                        <div class="position-relative custom-container">
+                            <article class="text-end">
+                                <h1 class="text-white text-end" data-aos="fade-up">
+                                    @item.Title
+                                    <span class="d-inline-block ps-3 py-1">@item.Highlight</span>
+                                </h1>
+                                <p class="text-white aos-item" data-aos="fade-up">@item.Description</p>
+                            </article>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="swiper-pagination swiper-pagination-white"></div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="abouthome py-3 py-lg-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="~/img/Dosa.jpg" alt="Foodeaz dosa batter" class="img-fluid" />
+                </div>
+                <div class="col-md-8 aos-item align-self-center" data-aos="fade-up">
+                    <h2 class="h2">Introduction of Foodeaz</h2>
+                    <p>Foodeaz is your trusted partner for authentic South Indian breakfasts. We specialize in crafting ready-to-cook dosa and idli batter that brings the taste of tradition straight to your home. With carefully selected ingredients, natural fermentation, and hygienic preparation, Foodeaz ensures every idli is soft and fluffy and every dosa is crispy and golden.</p>
+                    <p>At Foodeaz, we believe in:</p>
+                    <ul>
+                        <li>No preservatives</li>
+                        <li>100% natural ingredients</li>
+                        <li>Fermented for the perfect flavor &amp; texture</li>
+                    </ul>
+                    <h2 class="h2 pt-3">Foodeaz who we are</h2>
+                    <p>Our dynamic and passionate team of breakfast enthusiasts has come together to bring back the authentic breakfast experience to every community. With years of experience and a commitment to quality, we offer specialty batter blends crafted with care. Join us in our mission to nurture batter culture and create a place where people can share their love of breakfast.</p>
+                    <a asp-page="/About" class="link">Read More About us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision and mission -->
+    <section class="sectionabout">
+        <div class="custom-container">
+            <div class="row py-5">
+                <div class="col-lg-8 align-self-center aos-item" data-aos="fade-up">
+                    <h2 class="h2">Vision and Mission</h2>
+                    <p>Our vision is simple — to make wholesome, tasty, and convenient food accessible to every household. By combining traditional recipes with modern packaging and delivery, we give you the comfort of home-style cooking without the hassle of long preparation.</p>
+                    <p>Foodeaz isn’t just about batter — it’s about making your mornings easier, healthier, and tastier. Because every great day starts with a better batter.</p>
+                </div>
+                @* <div class="col-lg-4">
+                    <img src="~/img/Idli.jpg" alt="Foodeaz idli" class="img-fluid" />
+                </div> *@
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular products -->
+    <section class="home-services pt-4">
+        <div class="custom-container pb-4">
+            <article class="titlesection aos-item text-center mx-auto" data-aos="fade-up">
+                <h2 class="h2">Our Popular Traditional Foodeaz Products</h2>
+                <p>Our passionate team brings authentic breakfast experiences to every community.</p>
+            </article>
+            <div class="row py-4 catrow">
+                <div class="col-lg-6">
+                    <div class="cat-col p-2 border rounded-3">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a href="https://www.bigbasket.com/pd/40247666/foodeaz-dosa-batter-instant-mix-healthy-carbs-perfect-breakfast-800-g-pouch/?nc=cl-prod-list&amp;t_pos_sec=1&amp;t_pos_item=1&amp;t_s=Dosa+Batter" target="_blank" rel="noopener noreferrer">
+                                    <img src="~/img/542.jpg" alt="Foodeaz dosa batter" class="img-fluid rounded-3" />
+                                </a>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                                <div class="text-center aos-item py-3 py-lg-0" data-aos="fade-down">
+                                    <h3>Foodeaz Dosa Batter</h3>
+                                    <p>800 g Pouch. Price: ₹97 (inclusive of all taxes)</p>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.bigbasket.com/pd/40247666/foodeaz-dosa-batter-instant-mix-healthy-carbs-perfect-breakfast-800-g-pouch/?nc=cl-prod-list&amp;t_pos_sec=1&amp;t_pos_item=1&amp;t_s=Dosa+Batter" class="link">Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="cat-col p-2 border rounded-3">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a href="https://www.bigbasket.com/pd/40247667/foodeaz-idli-batter-instant-mix-healthy-carbs-perfect-breakfast-800-g-pouch/?nc=cl-prod-list&amp;t_pos_sec=1&amp;t_pos_item=2&amp;t_s=Idli+Batter" target="_blank" rel="noopener noreferrer">
+                                    <img src="~/img/542-1.jpg" alt="Foodeaz idli batter" class="img-fluid rounded-3" />
+                                </a>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                                <div class="text-center aos-item py-3 py-lg-0" data-aos="fade-up">
+                                    <h3>Foodeaz Idli Batter</h3>
+                                    <p>800 g Pouch. Price: ₹75 (inclusive of all taxes)</p>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.bigbasket.com/pd/40247667/foodeaz-idli-batter-instant-mix-healthy-carbs-perfect-breakfast-800-g-pouch/?nc=cl-prod-list&amp;t_pos_sec=1&amp;t_pos_item=2&amp;t_s=Idli+Batter" class="link">Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retail partners -->
+    <section class="retail-partners py-4 py-lg-5">
+        <div class="custom-container pb-4">
+            <article class="titlesection aos-item text-center mx-auto" data-aos="fade-up">
+                <h2 class="h2">Also Available at</h2>
+                <p>Find Foodeaz products at your trusted retailers across India</p>
+            </article>
+            <div class="row py-4">
+                <div class="col-12">
+                    <div class="swiper-container retailers-swiper">
+                        <div class="swiper-wrapper">
+                            @foreach (var retailer in Model.Retailers)
+                            {
+                                <div class="swiper-slide">
+                                    <a href="@retailer.Url" target="_blank" rel="noopener noreferrer" class="retailer-link">
+                                        <div class="retailer-card p-4 text-center">
+                                            <img src="@Url.Content("~/img/" + retailer.Image)" alt="@retailer.Name" class="retailer-logo" />
+                                            <h4 class="h5 pt-3">@retailer.Name</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why choose us: retained hidden as in the PHP source -->
+    <section class="whychooseus d-none">
+        <div class="custom-container">
+            <div class="row aos-item" data-aos="fade-up">
+                <div class="col-lg-8 align-self-center">
+                    <article class="titlesection">
+                        <h2 class="h2">Why Foodeaz</h2>
+                        <p>Our products help many people improve their lives and well-being</p>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <img src="~/img/whyimg.png" alt="" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog: retained hidden as in the PHP source -->
+    <section class="newsblog d-none">
+        <div class="custom-container">
+            <h2 class="h2">News &amp; Events</h2>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="userTestimonials py-2 py-md-4">
+        <div class="custom-container">
+            <div class="row">
+                <div class="col-lg-3 align-self-center">
+                    <article class="title py-4 py-md-0">
+                        <h4 class="h6 text-uppercase fbold mb-1">Our Support</h4>
+                        <h2 class="h2">Valuable Customer's Feedback</h2>
+                        <p class="pb-3">A testimonial is a client review or recommendation informing others about how a product or service benefited them.</p>
+                    </article>
+                </div>
+                <div class="col-md-9">
+                    <div class="swiper-container home-testimonials">
+                        <div class="swiper-wrapper">
+                            @foreach (var testimonial in Model.Testimonials)
+                            {
+                                <div class="swiper-slide text-center aos-item" data-aos="fade-up">
+                                    <img src="@Url.Content("~/img/" + testimonial.Image)" alt="@testimonial.Name" class="userIcon" />
+                                    <article class="py-3">
+                                        <h4 class="h4 swiper-slide__user-name">@testimonial.Name</h4>
+                                        <h5 class="h5 swiper-slide__city">@testimonial.City</h5>
+                                        <p>@testimonial.Message</p>
+                                    </article>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

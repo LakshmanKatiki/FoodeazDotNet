@@ -1,0 +1,12 @@
+@page "/payment-failed/{id:long}"
+@model Foodeaz.Web.Pages.PaymentFailedModel
+@{ ViewData["Title"] = "Payment Not Completed"; }
+<main class="container py-5"><div class="row justify-content-center"><div class="col-lg-7"><div class="card border-0 shadow-sm"><div class="card-body p-5 text-center">
+<div class="display-4 text-danger mb-3">!</div><h1 class="h2">Payment Not Completed</h1>
+<p>Order ID: <strong>@Model.Order?.OrderNumber</strong></p>
+@if (Model.SetupError) { <p class="text-danger">Payment service is not configured or could not create a payment session. Please contact Foodeaz support.</p> }
+else if (Model.VerificationError) { <p class="text-danger">We could not verify the payment response. The order has not been marked paid.</p> }
+else { <p>Your payment was cancelled or did not complete. If money was deducted, please contact support with your order ID.</p> }
+<p>Order status: <strong>@Model.Order?.PaymentStatus</strong></p>
+<a asp-page="/Purchase" class="btn btn-primary rounded-pill px-4">Return to Order</a>
+</div></div></div></div></main>

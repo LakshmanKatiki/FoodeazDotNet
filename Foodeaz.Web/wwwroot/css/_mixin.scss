@@ -1,0 +1,67 @@
+//transition mixin
+@mixin transition($property:null, $duration:null, $function:null){
+  transition:$property $duration $function;
+  -moz-transition:$property $duration $function;
+  -webkit-transition:$property $duration $function;
+  -ms-transition:$property $duration $function;
+  -o-transition:$property $duration $function;  
+}
+@mixin siteMain {  
+  -webkit-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  margin:0;
+  padding:0;
+  font-family: 'Golos Text', sans-serif;
+}
+
+//gradient
+@mixin linear-gradient($direction, $color-stops...) {
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}
+
+//position
+@mixin position($position, $top:null, $right:null, $bottom:null, $left:null){
+  position: $position;
+  top:$top;
+  right:$right;
+  bottom:$bottom;
+  left:$left;
+}
+
+//box shadow
+@mixin box-shadow($x-axis:null, $y-axis:null, $blur:null, $color:null){
+  box-shadow: $x-axis $y-axis $blur $color;
+  -moz-box-shadow: $x-axis $y-axis $blur $color;
+  -webkit-box-shadow: $x-axis $y-axis $blur $color;
+  -ms-box-shadow: $x-axis $y-axis $blur $color;
+}
+@mixin text-shadow($x-axis:null, $y-axis:null, $blur:null, $color:null){
+  text-shadow: $x-axis $y-axis $blur $color;
+  -moz-text-shadow: $x-axis $y-axis $blur $color;
+  -webkit-text-shadow: $x-axis $y-axis $blur $color;
+  -ms-text-shadow: $x-axis $y-axis $blur $color;
+}
+
+
+    //mixins for devices responsive
+    @mixin minMax($min, $max) {
+      @media (min-width: $min) and (max-width: $max) {
+        @content;
+      }
+    }
+    
+    @mixin min($min) {
+      @media (min-width: $min) {
+        @content;
+      }
+    }
+    
+    @mixin max($max) {
+      @media (max-width: $max) {
+        @content;
+      }
+    }

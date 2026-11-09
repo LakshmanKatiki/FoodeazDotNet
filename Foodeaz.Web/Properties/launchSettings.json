@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Foodeaz.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:54551;http://localhost:54552"
+    }
+  }
+}

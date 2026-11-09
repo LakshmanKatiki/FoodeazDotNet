@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] - Foodeaz</title>
+    <link rel="icon" type="image/png" href="~/img/fav.png" />
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bsnav.min.css" />
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link rel="stylesheet" href="~/css/swiper.min.css" />
+    <link rel="stylesheet" href="~/css/aos.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+<body>
+    @* <div id="load"></div> *@
+
+    @{
+        var currentPage = ViewContext.RouteData.Values["page"]?.ToString() ?? "";
+
+        var isHome = currentPage.Equals("/Index", StringComparison.OrdinalIgnoreCase);
+        var isAbout = currentPage.Equals("/About", StringComparison.OrdinalIgnoreCase);
+        var isContact = currentPage.Equals("/Contact", StringComparison.OrdinalIgnoreCase);
+
+        var isDosaBatter = currentPage.Equals("/Foodeaz-Dosa-Batter", StringComparison.OrdinalIgnoreCase);
+        var isIdlyBatter = currentPage.Equals("/Foodeaz-Idly-Batter", StringComparison.OrdinalIgnoreCase);
+
+        var isProductPage = isDosaBatter || isIdlyBatter;
+    }
+
+    <div id="load"></div>
+
+    <header class="fixed-top">
+        <div class="container">
+            <div class="navbar navbar-expand-lg bsnav">
+
+                <a class="navbar-brand position-relative" style="background-color:#009688"
+                   asp-page="/Index">
+                    <img src="~/img/Foodeaz_logo.png"
+                         alt="Foodeaz"
+                         asp-append-version="true" />
+                </a>
+
+                <button class="navbar-toggler toggler-spring"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-sm-end"
+                     id="mainNavbar">
+
+                    <ul class="navbar-nav navbar-mobile mx-0">
+
+                        <li class="nav-item">
+                            <a class="@(isHome ? "activenav" : "nav-link")"
+                               asp-page="/Index">
+                                <span>Home</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="@(isAbout ? "activenav" : "nav-link")"
+                               asp-page="/About">
+                                <span>About us</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown fadeup">
+                            <a class="@(isProductPage ? "activenav" : "nav-link")"
+                               href="#"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Products <i class="caret"></i>
+                            </a>
+
+                            <ul class="dropdown-menu navbar-nav">
+
+                                <li class="nav-item">
+                                    <a class="@(isDosaBatter ? "activesubnav" : "nav-link")"
+                                       asp-page="/FoodeazDosaBatter">
+                                        Foodeaz Dosa Batter
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="@(isIdlyBatter ? "activesubnav" : "nav-link")"
+                                       asp-page="/FoodeazIdlyBatter">
+                                        Foodeaz Idly Batter
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="@(isContact ? "activenav" : "nav-link")"
+                               asp-page="/Contact">
+                                <span>Contact us</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn rounded-pill px-4 text-white"
+                               style="background-color: #008f83;"
+                               asp-page="/Purchase">
+                                Order Now
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bsnav-mobile">
+                <div class="bsnav-mobile-overlay"></div>
+                <div class="navbar"></div>
+            </div>
+        </div>
+    </header>
+
+        <main style="padding-top:100px">@RenderBody()</main>
+        <!-- footer -->
+    <footer>
+        <div class="topFooter">
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- col -->
+                    <div class="col-md-4">
+                        <h3 class="mb-0">Foodeaz</h3>
+                        <p class="pt-3 pe-3">Dynamic and passionate team of foodeaz enthusiasts has come together, to bring back the authentic foodeaz experience to every community. With years of experience and acommitment to quality, we are proud to offer a range of specialty foodeaz blends, crafted by our master roasters.</p>
+
+                        <ul class="footerSocial navbar">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.facebook.com/foodeaz" target="_blank">
+                                    <span class="icon-facebook icomoon"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://twitter.com/foodeaz" target="_blank">
+                                    <span class="icon-twitter icomoon"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0)" target="_blank">
+                                    <span class="icon-linkedin icomoon"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0)" target="_blank">
+                                    <span class="icon-instagram icomoon"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /col -->
+
+                    <!-- col -->
+                    <div class="col-md-4 contactcol">
+                        <h3>Contact Us</h3>
+                        <p>Namrata Esates,CountryOven Lane, Opp Green Park Hotel,Ameerpet, Hyderabad, Telangana 500016</p>
+                        <p><a href="mailto:support@chikmagalurcoffeecafe.com" class="text-white">support@foodeaz.com</a></p>
+                        <p class="pb-0">+91 7483485901</p>                                                         
+                    </div>
+                    <!--/ col -->
+                    <!-- col -->
+                    <div class="col-md-4">
+                        <h3>Navigation</h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="footerLinks">
+                                    <li><a href="index">Home</a></li>
+                                    <li><a href="about">About</a></li>
+                                    <li><a href="faq">FAQ</a></li>
+                                   <!-- <li><a href="management">Management</a></li> -->
+                                    <li><a href="contact">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <h3>Products</h3>
+                                <ul class="footerLinks">
+                                    <li><a href="Foodeaz-Dosa-Batter"  target="_blank">Foodeaz Dosa Batter</a></li>
+                                    <li><a href="Foodeaz-Idly-Batter" target="_blank">Foodeaz Idly Batter</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <!--/ col -->
+                </div>
+                <!--/ row -->
+            </div>
+        </div>
+        <!-- footer bottom -->
+        <div class="footerBottom">
+             <div class="container-custom">
+                <p class="pb-0 mb-0">© @DateTime.Now.Year Foodeaz. All rights reserved.</p>
+             </div>
+        </div>
+        <!--/ footer bottom -->
+        <a href="javascript:void(0)" class="moveTop" id="movetop"><span class="icon-chevron-up icomoon"></span></a>
+    </footer>
+    <!--/ footer -->
+    <script>
+        AOS.init({
+        easing: 'ease-in-out-sine'
+        });
+    </script>
+
+    <script>
+        $(window).on('beforeunload', function() {
+        $(window).scrollTop(0);
+        });
+    </script>
+
+
+    <script>
+
+        //contact form validatin
+        $('#contact_form').validate({
+        ignore: [],
+        errorClass: 'text-danger', // You can change the animation class for a different entrance animation - check animations page
+        errorElement: 'div',
+        errorPlacement: function (error, e) {
+        e.parents('.form-group').append(error);
+        },
+        highlight: function (e) {
+        $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+        $(e).closest('.text-danger').remove();
+        },
+        rules: {
+        name: {
+        required: true
+        },
+        email:{
+        required:true,
+        email: true
+        },
+        phone: {
+        required: true,
+        number: true,
+        minlength: 10,
+        maxlength:10
+        },
+        },
+
+        messages: {
+        name: {
+        required: "Enter Name"
+        },
+        email:{
+        required: "Enter Valid Email"
+        },
+        phone: {
+        required: "Enter Valid Mobile Number"
+        },
+        },
+        });
+    </script>
+
+
+
+
+    <script>
+
+        //contact form validatin
+        $('#contact_form_franchise').validate({
+        ignore: [],
+        errorClass: 'text-danger', // You can change the animation class for a different entrance animation - check animations page
+        errorElement: 'div',
+        errorPlacement: function (error, e) {
+        e.parents('.form-group').append(error);
+        },
+        highlight: function (e) {
+        $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+        $(e).closest('.text-danger').remove();
+        },
+        rules: {
+        fran_full_name: {
+        required: true
+        },
+        fran_mail:{
+        required:true,
+        email: true
+        },
+        fran_phone: {
+        required: true,
+        number: true,
+        minlength: 10,
+        maxlength:10
+        },
+        fran_city: {
+        required: true
+        },
+        },
+
+        messages: {
+        fran_full_name: {
+        required: "Enter Name"
+        },
+        fran_phone: {
+        required: "Enter Valid Mobile Number"
+        },
+        fran_mail:{
+        required: "Enter Valid Email"
+        },
+        fran_city: {
+        required: "Enter City"
+        },
+        },
+        });
+    </script>
+
+    <script>
+        if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
+    <script src="~/js/jquery-3.6.0.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/swiper.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/bsnav.js"></script>
+    <script src="~/js/aos.js"></script>
+    <script src="~/js/custom.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    </body>
+</html>

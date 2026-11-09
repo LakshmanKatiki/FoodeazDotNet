@@ -1,0 +1,87 @@
+@page "/review-order"
+@model Foodeaz.Web.Pages.ReviewOrderModel
+@{
+    ViewData["Title"] = "Review Your Order";
+}
+
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <h1 class="h2 fw-bold mb-4">Review Your Order</h1>
+
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th class="text-end">Price</th>
+                                    <th class="text-end">Qty</th>
+                                    <th class="text-end">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img src="@item.ImageUrl" alt="@item.Name"
+                                                     width="70" height="70"
+                                                     class="rounded-3 border"
+                                                     style="object-fit: cover;"
+                                                     onerror="this.style.display='none';" />
+                                                <div>
+                                                    <div class="fw-semibold">@item.Name</div>
+                                                    <div class="small text-muted">Product price: ₹@item.Price.ToString("0.00")</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">₹@item.Price.ToString("0.00")</td>
+                                        <td class="text-end">@item.Quantity</td>
+                                        <td class="text-end fw-semibold">₹@((item.Price * item.Quantity).ToString("0.00"))</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="ms-auto" style="max-width:320px">
+                        <div class="d-flex justify-content-between py-1"><span>Subtotal</span><strong>₹@Model.Subtotal.ToString("0.00")</strong></div>
+                        <div class="d-flex justify-content-between py-1"><span>Delivery Charges</span><strong>₹@Model.DeliveryCharge.ToString("0.00")</strong></div>
+                        <hr />
+                        <div class="d-flex justify-content-between fs-5"><span>Total</span><strong>₹@Model.Total.ToString("0.00")</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="h5 fw-bold">Delivery Details</h2>
+                    <p class="mb-1"><strong>Name:</strong> @Model.Order?.CustomerName</p>
+                    <p class="mb-1"><strong>Mobile:</strong> @Model.Order?.Mobile</p>
+                    @if (!string.IsNullOrWhiteSpace(Model.Order?.Email))
+                    {
+                        <p class="mb-1"><strong>Email:</strong> @Model.Order.Email</p>
+                    }
+                    <p class="mb-1"><strong>Address:</strong> @Model.Order?.Address</p>
+                    <p class="mb-1"><strong>Delivery Date:</strong> @Model.Order?.DeliveryDate.ToString("dd MMM yyyy")</p>
+                    @if (!string.IsNullOrWhiteSpace(Model.Order?.Comments))
+                    {
+                        <p class="mb-0"><strong>Instructions:</strong> @Model.Order.Comments</p>
+                    }
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 justify-content-between">
+                <a asp-page="/Purchase" class="btn btn-outline-secondary rounded-pill px-4">← Edit Order</a>
+                <form method="post" asp-page-handler="Pay">
+                    <button type="submit" class="btn btn-primary rounded-pill px-4">Save Order &amp; Proceed to Payment</button>
+                </form>
+            </div>
+
+            <p class="small text-muted mt-3">Your order is saved before payment. It is confirmed only after Razorpay payment verification succeeds.</p>
+        </div>
+    </div>
+</main>

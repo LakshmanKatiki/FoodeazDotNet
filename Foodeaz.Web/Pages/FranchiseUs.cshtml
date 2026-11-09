@@ -1,0 +1,106 @@
+@page "/franchise-us"
+@model Foodeaz.Web.Pages.FranchiseUsModel
+@{ ViewData["Title"] = "Franchise Us"; }
+
+
+
+
+
+
+
+
+    <!-- main -->
+    <main class="subpage">
+        
+
+        <!-- sub page header -->
+        <section class="subpage-header franchise-header">
+        </section>
+        <!--/ sub page heder -->
+
+         <!-- sub page body -->
+         <section class="subpage-body">
+            <div class="custom-container">
+                <div class="row">
+                    <div class="col-md-6 align-self-center order-lg-last">
+                        <h2 class="h2 fran-title">Franchise Enquiry</h2>
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    Mail Sent Successfully. Thank you , we will contact you shortly.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <!-- <span aria-hidden="true">&times;</span> -->
+    </button>
+</div>
+
+                        <form class="app-form py-1" id="contact_form_franchise" action="" method="post">
+                            <div class="form-group mb-1 mb-md-2">
+                                <label for="fullname">Write Full Name</label>
+                                <input type="text" class="form-control" id="fullname" placeholder="Write Full Name" name="fran_full_name">
+
+                            </div>
+                            <div class="form-group mb-1 mb-md-2">
+                                <label for="PhoneNumber">Phone Number</label>
+                                <input type="text" class="form-control" id="PhoneNumber" placeholder="Phone Number" name="fran_phone">
+
+                            </div>
+                            <div class="form-group mb-1 mb-md-2">
+                                <label for="mail">Mail</label>
+                                <input type="text" class="form-control" id="mail" placeholder="Mail" name="fran_mail">
+
+                            </div>
+                            <div class="form-group mb-1 mb-md-2">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" placeholder="City" name="fran_city">
+                            </div>
+                            <div class="form-group mb-1 mb-md-2">
+                                <label for="msg">Comments</label>
+                                <textarea class="form-control" placeholder="Your Message" id="msg" style="height: 100px" name="fran_msg"></textarea>
+
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" value="Send Enquiry" class="link d-block w-100 text-center" name="submit-franchise-enquiry">
+                                <!-- <button class="btn w-100 text-uppercase link w-100 mt-3" name="submitContact">Submit</button>  -->
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/img/franchiseimg3.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                        <h2 class="h2">Why you should consider CCC franchise?</h2>
+                         <ul class="list-items">
+                            <li>Low investment and higher returns</li>
+                            <li>Established brand recognition.</li>
+                            <li>Access to local markets. </li>
+                            <li>Improved customer satisfaction.</li>
+                            <li>Repetitive customers base.</li>
+                            <li>Training and hand holding support</li>
+                         </ul>
+
+                         <h2 class="h2">Minimum requirements of a franchise</h2>
+                         <ul class="list-items">
+                            <li>2 workers minimum. </li>
+                            <li>100 to 150 sft Place. </li>
+                            <li>Prime Location.</li>
+                         </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/img/franchiseimg.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+
+            </div>
+         </section>
+        <!--/ sub page body -->
+    </main>
+    <!--/ main -->
+
+   <!-- footer -->
+    
+    <!--/ footer -->
+    
+

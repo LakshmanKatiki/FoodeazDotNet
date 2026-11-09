@@ -1,0 +1,12 @@
+@page "/payment-success/{id:long}"
+@model Foodeaz.Web.Pages.PaymentSuccessModel
+@{ ViewData["Title"] = "Payment Successful"; }
+<main class="container py-5"><div class="row justify-content-center"><div class="col-lg-7"><div class="card border-0 shadow-sm"><div class="card-body p-5 text-center">
+<div class="display-4 text-success mb-3">✓</div><h1 class="h2">Payment Successful</h1>
+<p>Thank you for ordering from Foodeaz.</p>
+<p>Order ID: <strong>@Model.Order?.OrderNumber</strong></p>
+<p>Transaction ID: <strong>@Model.Order?.TransactionId</strong></p>
+<p>Amount paid: <strong>₹@Model.Order?.Total.ToString("0.00")</strong></p>
+<p>We will send your order confirmation through the configured email and WhatsApp notifications.</p>
+<a asp-page="/Index" class="btn btn-primary rounded-pill px-4">Continue Shopping</a>
+</div></div></div></div></main>

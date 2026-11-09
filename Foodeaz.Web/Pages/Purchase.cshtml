@@ -1,0 +1,109 @@
+@page "/purchase"
+@model Foodeaz.Web.Pages.PurchaseModel
+@{
+    ViewData["Title"] = "Order Foodeaz Products";
+}
+
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <h1 class="h2 fw-bold mb-2">Order Foodeaz Products</h1>
+            <p class="text-muted">Choose quantities and enter your delivery details. Same-day delivery is not available; the earliest delivery date is tomorrow.</p>
+            <form method="post" asp-page-handler="Review">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <section class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
+                        <h2 class="h5 fw-bold mb-3">Select Products</h2>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+
+                                <div class="card border-0 shadow-sm mb-4">
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table align-middle mb-0">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th class="text-end">Price</th>
+                                                        <th class="text-center" style="width:120px;">Quantity</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @for (int i = 0; i < Model.Products.Count; i++)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                <div class="d-flex align-items-center gap-3">
+                                                                    <a href="@Model.Products[i].ImageUrl"
+                                                                       target="_blank"
+                                                                       rel="noopener noreferrer"
+                                                                       title="View full image">
+                                                                        <img src="@Model.Products[i].ImageUrl"
+                                                                             alt="@Model.Products[i].Name"
+                                                                             width="55"
+                                                                             height="55"
+                                                                             class="rounded-2 border"
+                                                                             style="object-fit:cover; cursor:zoom-in;" />
+                                                                    </a>
+                                                                    <div>
+                                                                        <div class="fw-semibold">
+                                                                            @Model.Products[i].Name
+                                                                        </div>
+                                                                        <div class="small text-muted">
+                                                                            @Model.Products[i].Id
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-end text-nowrap fw-semibold">
+                                                                ₹@Model.Products[i].Price.ToString("0.00")
+                                                            </td>
+                                                            <td>
+                                                                <input asp-for="Products[i].Id" type="hidden" />
+                                                                <input asp-for="Products[i].Quantity"
+                                                                       type="number"
+                                                                       min="0"
+                                                                       max="99"
+                                                                       class="form-control text-center"
+                                                                       style="min-width:75px;"
+                                                                       aria-label="Quantity for @Model.Products[i].Name" />
+                                                                <span asp-validation-for="Products[i].Quantity"
+                                                                      class="text-danger small"></span>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
+                        <h2 class="h5 fw-bold mb-3">Customer & Delivery Details</h2>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label asp-for="CustomerName" class="form-label"></label><input asp-for="CustomerName" class="form-control" autocomplete="name" /><span asp-validation-for="CustomerName" class="text-danger"></span></div>
+                            <div class="col-md-6"><label asp-for="Mobile" class="form-label">Mobile Number</label><input asp-for="Mobile" class="form-control" inputmode="numeric" maxlength="10" autocomplete="tel" /><span asp-validation-for="Mobile" class="text-danger"></span></div>
+                            <div class="col-12"><label asp-for="Email" class="form-label">Email (optional)</label><input asp-for="Email" class="form-control" autocomplete="email" /><span asp-validation-for="Email" class="text-danger"></span></div>
+                            <div class="col-12"><label asp-for="Address" class="form-label"></label><textarea asp-for="Address" class="form-control" rows="3" autocomplete="street-address"></textarea><span asp-validation-for="Address" class="text-danger"></span></div>
+                            <div class="col-md-6"><label asp-for="DeliveryDate" class="form-label"></label><input asp-for="DeliveryDate" type="date" class="form-control" min="@Model.EarliestDeliveryDate.ToString("yyyy-MM-dd")" value="@((Model.DeliveryDate ?? Model.EarliestDeliveryDate).ToString("yyyy-MM-dd"))" /><span asp-validation-for="DeliveryDate" class="text-danger"></span></div>
+                            <div class="col-12"><label asp-for="Comments" class="form-label"></label><textarea asp-for="Comments" class="form-control" rows="2"></textarea></div>
+                        </div>
+                    </div>
+                </section>
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                    <p class="mb-0 text-muted">Delivery eligibility is limited to eligible areas within 10 km of Ameerpet.</p>
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-4">Review Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

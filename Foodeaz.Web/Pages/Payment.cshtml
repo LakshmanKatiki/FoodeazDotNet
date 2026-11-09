@@ -1,0 +1,213 @@
+@page "/payment/{id:long}"
+@model Foodeaz.Web.Pages.PaymentModel
+
+@{
+    ViewData["Title"] = "Foodeaz Payment";
+}
+
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+
+            <div class="text-center mb-4">
+                <h1 class="fw-bold mb-1" style="color: #008f83;">
+                    Foodeaz
+                </h1>
+                <p class="text-muted mb-0">The Better Dosa Batter</p>
+            </div>
+
+            <div class="card border-0 shadow rounded-4 overflow-hidden">
+                <div class="p-3 text-white text-center"
+                     style="background-color: #008f83;">
+                    <h2 class="h4 mb-1">Complete Your Payment</h2>
+                    <p class="mb-0 small">
+                        Secure checkout for your order
+                    </p>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+
+                    <div class="mb-4">
+                        <label class="text-muted small">Order ID</label>
+                        <div class="fw-semibold text-break">
+                            @Model.Order?.OrderNumber
+                        </div>
+                    </div>
+
+                    <div class="rounded-3 p-3 mb-4"
+                         style="background-color: #f3f8f7;">
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Order amount</span>
+                            <span>
+                                ₹@((Model.Order?.Total ?? 0m) - 49m)
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="text-muted">Delivery charge</span>
+                            <span>₹49.00</span>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">Total payable</span>
+                            <span class="fs-3 fw-bold"
+                                  style="color: #008f83;">
+                                ₹@Model.Order?.Total.ToString("0.00")
+                            </span>
+                        </div>
+                    </div>
+
+                    <button type="button"
+                            id="payButton"
+                            class="btn btn-lg w-100 rounded-pill text-white fw-semibold py-3"
+                            style="background-color: #008f83; border: none;">
+                        <span id="payButtonText">
+                            Pay securely with Razorpay
+                        </span>
+                    </button>
+
+                    <p id="paymentError"
+                       class="text-danger mt-3 mb-0"
+                       role="alert"
+                       hidden>
+                        Unable to open payment checkout.
+                        Please try again.
+                    </p>
+
+                    <div class="text-center mt-4">
+                        <p class="small text-muted mb-1">
+                            <span aria-hidden="true">🔒</span>
+                            Secure payment processing
+                        </p>
+                        <p class="small text-muted mb-0">
+                            Your order will be confirmed after payment
+                            verification.
+                        </p>
+                    </div>
+
+                    <form id="successForm"
+                          method="post"
+                          asp-page-handler="Success">
+                        <input type="hidden"
+                               name="id"
+                               value="@Model.Order?.Id" />
+
+                        <input type="hidden"
+                               name="razorpay_payment_id"
+                               id="paymentId" />
+
+                        <input type="hidden"
+                               name="razorpay_order_id"
+                               id="razorpayOrderId" />
+
+                        <input type="hidden"
+                               name="razorpay_signature"
+                               id="signature" />
+                    </form>
+
+                    <form id="failureForm"
+                          method="post"
+                          asp-page-handler="Failure">
+                        <input type="hidden"
+                               name="id"
+                               value="@Model.Order?.Id" />
+                    </form>
+
+                </div>
+            </div>
+
+            <p class="text-center text-muted small mt-4">
+                Thank you for choosing Foodeaz!
+            </p>
+
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        const payButton = document.getElementById("payButton");
+        const paymentError = document.getElementById("paymentError");
+
+        payButton.addEventListener("click", function () {
+            paymentError.hidden = true;
+
+            if (typeof Razorpay === "undefined") {
+                paymentError.textContent =
+                    "Payment checkout could not load. Please check your internet connection and try again.";
+                paymentError.hidden = false;
+                return;
+            }
+
+            const options = {
+                key: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.KeyId)),
+                amount: @((long)Math.Round((Model.Order?.Total ?? 0m) * 100m)),
+                currency: "INR",
+                name: "Foodeaz",
+                description: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                    "Order " + (Model.Order?.OrderNumber ?? ""))),
+                order_id: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                    Model.Order?.RazorpayOrderId)),
+
+                handler: function (response) {
+                    document.getElementById("paymentId").value =
+                        response.razorpay_payment_id;
+
+                    document.getElementById("razorpayOrderId").value =
+                        response.razorpay_order_id;
+
+                    document.getElementById("signature").value =
+                        response.razorpay_signature;
+
+                    document.getElementById("successForm").submit();
+                },
+
+                modal: {
+                    ondismiss: function () {
+                        // Closing checkout does not necessarily mean payment failed.
+                        // Leave the order pending so the customer can retry.
+                        payButton.disabled = false;
+                        document.getElementById("payButtonText").textContent =
+                            "Pay securely with Razorpay";
+                    }
+                },
+
+                theme: {
+                    color: "#008f83"
+                }
+            };
+
+            try {
+                payButton.disabled = true;
+                document.getElementById("payButtonText").textContent =
+                    "Opening secure checkout...";
+
+                const checkout = new Razorpay(options);
+
+                checkout.on("payment.failed", function () {
+                    payButton.disabled = false;
+                    document.getElementById("payButtonText").textContent =
+                        "Pay securely with Razorpay";
+
+                    paymentError.textContent =
+                        "Payment was unsuccessful. Please try again.";
+                    paymentError.hidden = false;
+                });
+
+                checkout.open();
+            }
+            catch (error) {
+                payButton.disabled = false;
+                document.getElementById("payButtonText").textContent =
+                    "Pay securely with Razorpay";
+
+                paymentError.hidden = false;
+            }
+        });
+    </script>
+}
